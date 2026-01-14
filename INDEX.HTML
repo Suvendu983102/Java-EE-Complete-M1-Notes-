@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java EE Complete Notes - Educational Resource</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a252f 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .highlight-box {
+            background-color: rgba(52, 152, 219, 0.2);
+            border-left: 5px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            text-align: left;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Main Content */
+        .content-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            margin-bottom: 4rem;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .sidebar-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .sidebar-nav {
+            padding: 0;
+        }
+
+        .sidebar-nav li {
+            list-style: none;
+            border-bottom: 1px solid #eee;
+        }
+
+        .sidebar-nav li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 1.2rem;
+            color: #333;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .sidebar-nav a:hover {
+            background-color: #f5f7fa;
+            color: var(--secondary);
+            padding-left: 1.5rem;
+        }
+
+        .sidebar-nav a.active {
+            background-color: #e3f2fd;
+            color: var(--secondary);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .sidebar-nav i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Content Sections */
+        .content {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .section {
+            padding: 2.5rem;
+            border-bottom: 1px solid #eee;
+            scroll-margin-top: 120px;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-icon {
+            background-color: var(--secondary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .section-content {
+            font-size: 1.05rem;
+        }
+
+        .section-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .section-content ul, .section-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .section-content li strong {
+            color: var(--primary);
+        }
+
+        .info-card {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .code-block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block .comment {
+            color: #7f8c8d;
+        }
+
+        .code-block .keyword {
+            color: #e74c3c;
+        }
+
+        .code-block .string {
+            color: #27ae60;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            border-top: 4px solid var(--secondary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .footer-section p {
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .content-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+                margin-bottom: 2rem;
+            }
+            
+            .section {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Print styles */
+        @media print {
+            header, footer, .sidebar, .scroll-top {
+                display: none;
+            }
+            
+            .content {
+                box-shadow: none;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-laptop-code"></i>
+                    <div class="logo-text">
+                        <h1>Java EE Complete Notes</h1>
+                        <p>Educational Resource for Students</p>
+                    </div>
+                </div>
+                <nav class="nav-links">
+                    <a href="#overview"><i class="fas fa-home"></i> Home</a>
+                    <a href="#architecture"><i class="fas fa-sitemap"></i> Architecture</a>
+                    <a href="#jdbc"><i class="fas fa-database"></i> JDBC</a>
+                    <a href="#jsp"><i class="fas fa-file-code"></i> JSP</a>
+                    <a href="#servlets"><i class="fas fa-server"></i> Servlets</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Master Java Enterprise Edition</h2>
+            <p>Comprehensive, easy-to-understand notes covering all essential Java EE concepts. Perfect for students and beginners looking to build enterprise web applications.</p>
+            
+            <div class="highlight-box">
+                <h3><i class="fas fa-graduation-cap"></i> What You'll Learn</h3>
+                <p>This resource covers Java EE architecture, JDBC for database connectivity, JSP for dynamic web pages, Servlets for request handling, and how these technologies integrate to build modern web applications.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-container">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h3><i class="fas fa-book"></i> Course Contents</h3>
+                </div>
+                <ul class="sidebar-nav">
+                    <li><a href="#overview" class="active"><i class="fas fa-info-circle"></i> Java EE Overview</a></li>
+                    <li><a href="#architecture"><i class="fas fa-sitemap"></i> Java EE Architecture</a></li>
+                    <li><a href="#se-vs-ee"><i class="fas fa-code-branch"></i> Java SE vs Java EE</a></li>
+                    <li><a href="#jdbc"><i class="fas fa-database"></i> JDBC in Web Apps</a></li>
+                    <li><a href="#jsp"><i class="fas fa-file-code"></i> JavaServer Pages (JSP)</a></li>
+                    <li><a href="#servlets"><i class="fas fa-server"></i> Servlets</a></li>
+                    <li><a href="#integration"><i class="fas fa-cogs"></i> Technology Integration</a></li>
+                    <li><a href="#modern"><i class="fas fa-rocket"></i> Modern Development</a></li>
+                </ul>
+            </aside>
+
+            <!-- Content Sections -->
+            <main class="content">
+                <!-- Section 1: Overview -->
+                <section id="overview" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h2 class="section-title">Introduction to Java EE</h2>
+                    </div>
+                    
+                    <p class="section-content">
+                        Java EE (Java Platform, Enterprise Edition), now known as <strong>Jakarta EE</strong>, is a set of specifications extending Java SE with enterprise features such as distributed computing and web services. It provides a robust platform for developing and running large-scale, multi-tiered, scalable, reliable, and secure network applications.
+                    </p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h4>Platform Independent</h4>
+                            <p>Write once, run anywhere - Java's core principle applies to Java EE applications too.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-cube"></i>
+                            <h4>Component-Based</h4>
+                            <p>Modular design with reusable components promotes maintainability.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-box"></i>
+                            <h4>Container-Managed</h4>
+                            <p>Containers handle component lifecycle, security, transactions, and more.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-wrench"></i>
+                            <h4>Declarative</h4>
+                            <p>Configuration through annotations and XML reduces boilerplate code.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4><i class="fas fa-lightbulb"></i> Key Takeaway</h4>
+                        <p>Java EE is not a product but a <strong>standard specification</strong>. Different vendors like Oracle, Red Hat, and Eclipse provide implementations of these specifications (like GlassFish, WildFly, TomEE).</p>
+                    </div>
+                </section>
+
+                <!-- Section 2: Architecture -->
+                <section id="architecture" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <h2 class="section-title">Java EE Architecture</h2>
+                    </div>
+                    
+                    <h3 class="section-subtitle">Multi-Tier Architecture</h3>
+                    <p class="section-content">
+                        Java EE applications typically follow a multi-tier architecture that separates concerns into distinct layers:
+                    </p>
+                    
+                    <div class="info-card">
+                        <h4>1. Client Tier (Presentation Layer)</h4>
+                        <p>Web browsers, mobile devices, or desktop applications that handle user interface and interaction. Can be thin clients (HTML/JavaScript) or thick clients (standalone applications).</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>2. Web Tier (Presentation Logic)</h4>
+                        <p>Handles HTTP requests and generates dynamic content. Technologies include:
+                            <ul>
+                                <li><strong>Servlets</strong>: Handle HTTP requests and responses</li>
+                                <li><strong>JSP (JavaServer Pages)</strong>: Dynamic web page generation</li>
+                                <li><strong>JSF (JavaServer Faces)</strong>: Component-based UI framework</li>
+                            </ul>
+                        </p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>3. Business Tier (Business Logic Layer)</h4>
+                        <p>Contains the core business logic of the application:
+                            <ul>
+                                <li><strong>EJB (Enterprise JavaBeans)</strong>: Business logic components</li>
+                                <li><strong>Session Beans</strong>: Execute business logic</li>
+                                <li><strong>Message-Driven Beans</strong>: Asynchronous message processing</li>
+                                <li><strong>Web Services</strong>: RESTful and SOAP endpoints</li>
+                            </ul>
+                        </p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>4. Data Tier (Enterprise Information System)</h4>
+                        <p>Handles data persistence and storage:
+                            <ul>
+                                <li><strong>Database systems</strong>: MySQL, PostgreSQL, Oracle</li>
+                                <li><strong>JPA (Java Persistence API)</strong>: Object-relational mapping</li>
+                                <li><strong>JDBC</strong>: Database connectivity</li>
+                                <li><strong>File systems and messaging systems</strong></li>
+                            </ul>
+                        </p>
+                    </div>
+                    
+                    <div class="code-block">
+                        <span class="comment">// Example of a simple Java EE architecture flow</span><br>
+                        <span class="keyword">Client</span> (Browser) → <span class="keyword">Web Tier</span> (Servlet/JSP) → <br>
+                        <span class="keyword">Business Tier</span> (EJB/Service Classes) → <span class="keyword">Data Tier</span> (JDBC/JPA) → <span class="keyword">Database</span>
+                    </div>
+                </section>
+
+                <!-- Section 3: Java SE vs Java EE -->
+                <section id="se-vs-ee" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <h2 class="section-title">Java SE vs Java EE</h2>
+                    </div>
+                    
+                    <div class="section-content">
+                        <p>Understanding the difference between Java SE (Standard Edition) and Java EE (Enterprise Edition) is crucial for choosing the right platform for your application.</p>
+                        
+                        <h3 class="section-subtitle">Java SE (Standard Edition)</h3>
+                        <p>The foundation platform for Java development. Provides core Java functionality suitable for desktop and standalone applications.</p>
+                        
+                        <h4>Key Features:</h4>
+                        <ul>
+                            <li><strong>Core language features</strong>: OOP, collections, exceptions, generics</li>
+                            <li><strong>Basic libraries</strong>: java.lang, java.util, java.io, java.nio</li>
+                            <li><strong>GUI development</strong>: Swing, AWT (though less common today)</li>
+                            <li><strong>Networking</strong>: java.net package for network programming</li>
+                            <li><strong>Multithreading</strong>: java.util.concurrent for concurrent programming</li>
+                            <li><strong>JDBC</strong>: Basic database connectivity</li>
+                        </ul>
+                        
+                        <h3 class="section-subtitle">Java EE (Enterprise Edition)</h3>
+                        <p>Built on top of Java SE. Designed for large-scale, distributed, enterprise applications with comprehensive infrastructure for web and enterprise applications.</p>
+                        
+                        <h4>Key Features (Includes all Java SE features plus):</h4>
+                        <ul>
+                            <li><strong>Web application development</strong>: Servlets, JSP, JSF, JSTL</li>
+                            <li><strong>Enterprise JavaBeans (EJB)</strong>: Business logic components</li>
+                            <li><strong>Web services</strong>: JAX-RS (RESTful), JAX-WS (SOAP)</li>
+                            <li><strong>Messaging services</strong>: JMS (Java Message Service)</li>
+                            <li><strong>Transaction management</strong>: JTA (Java Transaction API)</li>
+                            <li><strong>Persistence</strong>: JPA (Java Persistence API)</li>
+                            <li><strong>Security</strong>: JAAS (Java Authentication and Authorization Service)</li>
+                            <li><strong>Dependency Injection</strong>: CDI (Contexts and Dependency Injection)</li>
+                        </ul>
+                        
+                        <div class="info-card">
+                            <h4><i class="fas fa-balance-scale"></i> Comparison Summary</h4>
+                            <p><strong>Java SE</strong>: Core Java platform for general-purpose applications (desktop, command-line).<br>
+                            <strong>Java EE</strong>: Enterprise extension for building large-scale, distributed, web-based applications.</p>
+                            <p>Think of Java SE as the foundation, and Java EE as a specialized toolkit built on that foundation for enterprise needs.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: JDBC -->
+                <section id="jdbc" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h2 class="section-title">JDBC in Web Applications</h2>
+                    </div>
+                    
+                    <div class="section-content">
+                        <h3 class="section-subtitle">What is JDBC?</h3>
+                        <p>JDBC (Java Database Connectivity) is a Java API that enables Java applications to interact with relational databases. It provides a standard interface for connecting to databases, executing SQL queries, and processing results.</p>
+                        
+                        <h3 class="section-subtitle">JDBC Architecture</h3>
+                        <p>JDBC uses a driver manager and database-specific drivers to communicate with databases:</p>
+                        
+                        <div class="code-block">
+                            <span class="keyword">Java Application</span> → <span class="keyword">JDBC API</span> → <span class="keyword">JDBC Driver Manager</span> → <br>
+                            <span class="keyword">JDBC Driver</span> → <span class="keyword">Database</span>
+                        </div>
+                        
+                        <h3 class="section-subtitle">JDBC Driver Types</h3>
+                        <ol>
+                            <li><strong>Type 1: JDBC-ODBC Bridge Driver</strong> - Translates JDBC calls to ODBC calls (deprecated)</li>
+                            <li><strong>Type 2: Native-API Driver</strong> - Converts JDBC calls to database-specific native calls</li>
+                            <li><strong>Type 3: Network Protocol Driver</strong> - Pure Java driver that sends JDBC calls to middleware server</li>
+                            <li><strong>Type 4: Thin Driver (Most Common)</strong> - Pure Java implementation that converts JDBC calls directly to database protocol</li>
+                        </ol>
+                        
+                        <h3 class="section-subtitle">Basic JDBC Workflow</h3>
+                        <div class="code-block">
+                            <span class="comment">// 1. Load the JDBC driver</span><br>
+                            Class.forName(<span class="string">"com.mysql.cj.jdbc.Driver"</span>);<br><br>
+                            
+                            <span class="comment">// 2. Establish a connection</span><br>
+                            Connection conn = DriverManager.getConnection(<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"jdbc:mysql://localhost:3306/mydb"</span>, <span class="string">"username"</span>, <span class="string">"password"</span>);<br><br>
+                            
+                            <span class="comment">// 3. Create a statement</span><br>
+                            Statement stmt = conn.createStatement();<br><br>
+                            
+                            <span class="comment">// 4. Execute a query</span><br>
+                            ResultSet rs = stmt.executeQuery(<span class="string">"SELECT * FROM users"</span>);<br><br>
+                            
+                            <span class="comment">// 5. Process the results</span><br>
+                            <span class="keyword">while</span>(rs.next()) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;String name = rs.getString(<span class="string">"username"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(name);<br>
+                            }<br><br>
+                            
+                            <span class="comment">// 6. Close resources</span><br>
+                            rs.close();<br>
+                            stmt.close();<br>
+                            conn.close();
+                        </div>
+                        
+                        <div class="info-card">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Important Note</h4>
+                            <p>Always use <strong>PreparedStatement</strong> instead of Statement for queries with parameters to prevent SQL injection attacks. Also, always close database resources (Connection, Statement, ResultSet) in a finally block or use try-with-resources to avoid memory leaks.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: JSP -->
+                <section id="jsp" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-file-code"></i>
+                        </div>
+                        <h2 class="section-title">JavaServer Pages (JSP)</h2>
+                    </div>
+                    
+                    <div class="section-content">
+                        <h3 class="section-subtitle">What is JSP?</h3>
+                        <p>JSP (JavaServer Pages) is a server-side technology used to create dynamic web pages by embedding Java code within HTML. JSP pages are compiled into servlets by the container, combining the power of Java with the simplicity of HTML.</p>
+                        
+                        <h3 class="section-subtitle">JSP Lifecycle</h3>
+                        <ol>
+                            <li><strong>Translation Phase</strong>: JSP is converted to servlet source code (.java file)</li>
+                            <li><strong>Compilation Phase</strong>: Servlet source is compiled to bytecode (.class file)</li>
+                            <li><strong>Initialization Phase</strong>: jspInit() method is called once when the servlet is instantiated</li>
+                            <li><strong>Request Processing</strong>: _jspService() method handles each client request</li>
+                            <li><strong>Destruction Phase</strong>: jspDestroy() method is called when the servlet is unloaded</li>
+                        </ol>
+                        
+                        <h3 class="section-subtitle">JSP Syntax Elements</h3>
+                        <div class="code-block">
+                            <span class="comment">&lt;!-- 1. Directive Tags --&gt;</span><br>
+                            <span class="string">&lt;%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%&gt;</span><br>
+                            <span class="string">&lt;%@ include file="header.jsp" %&gt;</span><br><br>
+                            
+                            <span class="comment">&lt;!-- 2. Declaration Tags --&gt;</span><br>
+                            <span class="string">&lt;%! </span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private int</span> count = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public void</span> increment() { count++; }<br>
+                            <span class="string">%&gt;</span><br><br>
+                            
+                            <span class="comment">&lt;!-- 3. Scriptlet Tags --&gt;</span><br>
+                            <span class="string">&lt;% </span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;String name = request.getParameter(<span class="string">"username"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(name != null) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println(<span class="string">"Hello, "</span> + name);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            <span class="string">%&gt;</span><br><br>
+                            
+                            <span class="comment">&lt;!-- 4. Expression Tags --&gt;</span><br>
+                            <span class="string">Current time: &lt;%= new java.util.Date() %&gt;</span><br><br>
+                            
+                            <span class="comment">&lt;!-- 5. Action Tags --&gt;</span><br>
+                            <span class="string">&lt;jsp:include page="footer.jsp" /&gt;</span><br>
+                            <span class="string">&lt;jsp:forward page="result.jsp" /&gt;</span>
+                        </div>
+                        
+                        <h3 class="section-subtitle">JSP Implicit Objects</h3>
+                        <p>JSP provides several implicit objects (predefined variables) that can be used without declaration:</p>
+                        <ul>
+                            <li><strong>request</strong>: HttpServletRequest object containing client request information</li>
+                            <li><strong>response</strong>: HttpServletResponse object for sending response to client</li>
+                            <li><strong>out</strong>: JspWriter object for writing content to output stream</li>
+                            <li><strong>session</strong>: HttpSession object for maintaining user session data</li>
+                            <li><strong>application</strong>: ServletContext object shared across entire application</li>
+                            <li><strong>pageContext</strong>: PageContext object providing access to all implicit objects</li>
+                            <li><strong>config</strong>: ServletConfig object for servlet configuration</li>
+                            <li><strong>page</strong>: Reference to the current servlet instance (like 'this')</li>
+                            <li><strong>exception</strong>: Throwable object available in error pages</li>
+                        </ul>
+                        
+                        <div class="info-card">
+                            <h4><i class="fas fa-lightbulb"></i> Best Practice</h4>
+                            <p>Minimize Java code in JSP pages by using <strong>JSTL (JSP Standard Tag Library)</strong> and <strong>EL (Expression Language)</strong>. This separates presentation logic from business logic and makes JSP pages cleaner and more maintainable.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 6: Servlets -->
+                <section id="servlets" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h2 class="section-title">Servlets</h2>
+                    </div>
+                    
+                    <div class="section-content">
+                        <h3 class="section-subtitle">What is a Servlet?</h3>
+                        <p>A servlet is a Java class that runs on a web server and handles HTTP requests and responses. Servlets are the foundation of Java web applications, providing a robust, scalable way to build server-side components.</p>
+                        
+                        <h3 class="section-subtitle">Servlet Lifecycle</h3>
+                        <ol>
+                            <li><strong>Loading</strong>: Container loads servlet class (typically on first request)</li>
+                            <li><strong>Initialization</strong>: init() method is called once with ServletConfig parameter</li>
+                            <li><strong>Request Handling</strong>: service() method dispatches requests to appropriate doGet(), doPost(), etc.</li>
+                            <li><strong>Destruction</strong>: destroy() method is called before servlet is unloaded from memory</li>
+                        </ol>
+                        
+                        <h3 class="section-subtitle">Servlet Example</h3>
+                        <div class="code-block">
+                            <span class="keyword">import</span> java.io.*;<br>
+                            <span class="keyword">import</span> javax.servlet.*;<br>
+                            <span class="keyword">import</span> javax.servlet.http.*;<br><br>
+                            
+                            <span class="keyword">public class</span> HelloServlet <span class="keyword">extends</span> HttpServlet {<br><br>
+                            
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Handle GET requests</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected void</span> doGet(HttpServletRequest request, <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpServletResponse response) <span class="keyword">throws</span> ServletException, IOException {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response.setContentType(<span class="string">"text/html"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PrintWriter out = response.getWriter();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println(<span class="string">"&lt;html&gt;&lt;body&gt;"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println(<span class="string">"&lt;h1&gt;Hello from Servlet!&lt;/h1&gt;"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println(<span class="string">"&lt;/body&gt;&lt;/html&gt;"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                            
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Handle POST requests</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected void</span> doPost(HttpServletRequest request, <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpServletResponse response) <span class="keyword">throws</span> ServletException, IOException {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String name = request.getParameter(<span class="string">"username"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Process form submission...</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <h3 class="section-subtitle">Servlet Configuration</h3>
+                        <p>Servlets can be configured in two ways:</p>
+                        
+                        <div class="code-block">
+                            <span class="comment">// 1. Using web.xml (Deployment Descriptor)</span><br>
+                            <span class="string">&lt;servlet&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&lt;servlet-name&gt;</span>HelloServlet<span class="string">&lt;/servlet-name&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&lt;servlet-class&gt;</span>com.example.HelloServlet<span class="string">&lt;/servlet-class&gt;</span><br>
+                            <span class="string">&lt;/servlet&gt;</span><br>
+                            <span class="string">&lt;servlet-mapping&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&lt;servlet-name&gt;</span>HelloServlet<span class="string">&lt;/servlet-name&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&lt;url-pattern&gt;</span>/hello<span class="string">&lt;/url-pattern&gt;</span><br>
+                            <span class="string">&lt;/servlet-mapping&gt;</span><br><br>
+                            
+                            <span class="comment">// 2. Using Annotations (Java EE 5+)</span><br>
+                            <span class="string">@WebServlet(</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;name = <span class="string">"HelloServlet"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;urlPatterns = {<span class="string">"/hello"</span>, <span class="string">"/hello/*"</span>},<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;initParams = {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">@WebInitParam(name = "message", value = "Hello World")</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            <span class="string">)</span><br>
+                            <span class="keyword">public class</span> HelloServlet <span class="keyword">extends</span> HttpServlet { ... }
+                        </div>
+                        
+                        <div class="info-card">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Servlet Best Practices</h4>
+                            <ul>
+                                <li>Avoid using instance variables in servlets (they're not thread-safe)</li>
+                                <li>Always close resources (database connections, file streams) in finally blocks</li>
+                                <li>Use RequestDispatcher for forwarding to JSP pages</li>
+                                <li>Implement proper error handling with custom error pages</li>
+                                <li>Use filters for cross-cutting concerns (logging, authentication, encoding)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 7: Integration -->
+                <section id="integration" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h2 class="section-title">Technology Integration</h2>
+                    </div>
+                    
+                    <div class="section-content">
+                        <h3 class="section-subtitle">How JDBC, JSP, and Servlets Work Together</h3>
+                        <p>In a typical Java EE web application, these technologies work together in a coordinated manner:</p>
+                        
+                        <div class="code-block">
+                            <span class="comment">// 1. User submits form via JSP</span><br>
+                            <span class="string">&lt;form action="RegisterServlet" method="post"&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&lt;input type="text" name="username"&gt;</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&lt;input type="submit" value="Register"&gt;</span><br>
+                            <span class="string">&lt;/form&gt;</span><br><br>
+                            
+                            <span class="comment">// 2. Servlet processes the request</span><br>
+                            <span class="string">@WebServlet("/RegisterServlet")</span><br>
+                            <span class="keyword">public class</span> RegisterServlet <span class="keyword">extends</span> HttpServlet {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected void</span> doPost(...) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String username = request.getParameter(<span class="string">"username"</span>);<br><br>
+                            
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 3. Use JDBC to save to database</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Connection conn = ...;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PreparedStatement pstmt = conn.prepareStatement(<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"INSERT INTO users(username) VALUES(?)"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pstmt.setString(1, username);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pstmt.executeUpdate();<br><br>
+                            
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 4. Forward to result JSP</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request.setAttribute(<span class="string">"message"</span>, <span class="string">"Registration successful!"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RequestDispatcher rd = request.getRequestDispatcher(<span class="string">"result.jsp"</span>);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rd.forward(request, response);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <h3 class="section-subtitle">MVC Pattern Implementation</h3>
+                        <p>Java EE applications often follow the Model-View-Controller (MVC) pattern:</p>
+                        
+                        <div class="info-card">
+                            <h4>Model (Business Logic + Data)</h4>
+                            <ul>
+                                <li>JavaBeans/POJOs represent data</li>
+                                <li>DAO (Data Access Object) classes handle JDBC operations</li>
+                                <li>Service classes contain business logic</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h4>View (Presentation)</h4>
+                            <ul>
+                                <li>JSP pages display data</li>
+                                <li>Use JSTL and EL for dynamic content</li>
+                                <li>Minimal Java code in JSPs</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h4>Controller (Request Handling)</h4>
+                            <ul>
+                                <li>Servlets handle HTTP requests</li>
+                                <li>Coordinate between Model and View</li>
+                                <li>Manage application flow and navigation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 8: Modern Development -->
+                <section id="modern" class="section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h2 class="section-title">Modern Java EE Development</h2>
+                    </div>
+                    
+                    <div class="section-content">
+                        <h3 class="section-subtitle">Evolution to Jakarta EE</h3>
+                        <p>Java EE has transitioned to <strong>Jakarta EE</strong> under the Eclipse Foundation. Key changes include:</p>
+                        <ul>
+                            <li>New namespace: <code>jakarta.*</code> instead of <code>javax.*</code></li>
+                            <li>Active community-driven development</li>
+                            <li>Modern cloud-native features</li>
+                            <li>Regular release cycles</li>
+                        </ul>
+                        
+                        <h3 class="section-subtitle">Popular Frameworks and Tools</h3>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-leaf"></i>
+                                <h4>Spring Framework</h4>
+                                <p>Comprehensive enterprise framework with dependency injection, AOP, and extensive modules.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-bolt"></i>
+                                <h4>Spring Boot</h4>
+                                <p>Rapid development with embedded servers, auto-configuration, and production-ready features.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-layer-group"></i>
+                                <h4>Hibernate/JPA</h4>
+                                <p>Object-relational mapping for simplified database operations.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-project-diagram"></i>
+                                <h4>Microservices</h4>
+                                <p>Architectural style for breaking applications into smaller, independently deployable services.</p>
+                            </div>
+                        </div>
+                        
+                        <h3 class="section-subtitle">Learning Path Recommendations</h3>
+                        <ol>
+                            <li><strong>Start with core Java</strong>: Solid understanding of Java SE is essential</li>
+                            <li><strong>Learn Servlets and JSP</strong>: Foundation of Java web development</li>
+                            <li><strong>Master JDBC</strong>: Database connectivity is crucial for most applications</li>
+                            <li><strong>Explore frameworks</strong>: Spring Boot is highly recommended for modern development</li>
+                            <li><strong>Build projects</strong>: Apply knowledge by building complete applications</li>
+                            <li><strong>Learn complementary technologies</strong>: HTML, CSS, JavaScript, SQL</li>
+                        </ol>
+                        
+                        <div class="info-card">
+                            <h4><i class="fas fa-graduation-cap"></i> Conclusion</h4>
+                            <p>Understanding Java EE architecture, JDBC, JSP, and Servlets provides a solid foundation for developing enterprise Java applications. While newer frameworks like Spring Boot have gained popularity, the core concepts remain relevant. Practice building applications that integrate these components to reinforce your learning and prepare for real-world development challenges.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Java EE Notes</h3>
+                    <p>Comprehensive educational resource for students learning Java Enterprise Edition. Covers core concepts, architecture, and practical implementation.</p>
+                    <p><i class="fas fa-envelope"></i> educational@javaee-notes.com</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#overview">Java EE Overview</a></li>
+                        <li><a href="#architecture">Architecture</a></li>
+                        <li><a href="#jdbc">JDBC</a></li>
+                        <li><a href="#jsp">JSP</a></li>
+                        <li><a href="#servlets">Servlets</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Additional Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://jakarta.ee" target="_blank">Jakarta EE Official Site</a></li>
+                        <li><a href="https://spring.io" target="_blank">Spring Framework</a></li>
+                        <li><a href="https://docs.oracle.com/javaee" target="_blank">Oracle Java EE Docs</a></li>
+                        <li><a href="https://github.com" target="_blank">Code Examples on GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Java EE Educational Resource. For academic purposes only.</p>
+                <p>All content is provided for educational use. Java and Java EE are trademarks of Oracle Corporation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active state in sidebar
+                    document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+        
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Highlight current section in sidebar on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const scrollPos = window.pageYOffset + 150;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Initialize the first section as active
+        document.querySelector('.sidebar-nav a').classList.add('active');
+    </script>
+</body>
+</html>
